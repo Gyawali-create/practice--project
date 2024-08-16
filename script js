@@ -1,0 +1,72 @@
+// JavaScript for Smooth Scrolling and Dynamic Greeting
+
+document.addEventListener("DOMContentLoaded", function() {
+    // Smooth scrolling for internal links
+    const internalLinks = document.querySelectorAll('a[href^="#"]');
+
+    internalLinks.forEach(link => {
+        link.addEventListener("click", function(event) {
+            event.preventDefault();
+            document.querySelector(this.getAttribute("href")).scrollIntoView({
+                behavior: "smooth"
+            });
+        });
+    });
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Click to Change Image</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="image-container">
+        <img id="changeableImage" src="image1.jpg" alt="Click to change" title="Click me!">
+    </div>
+    <script src="script.js"></script>
+
+
+    // Dynamic Greeting Based on Time of Day
+    const greetingElement = document.createElement('p');
+    const hours = new Date().getHours();
+    let greetingMessage;
+
+    if (hours < 12) {
+        greetingMessage = "Good Morning!";
+    } else if (hours < 18) {
+        greetingMessage = "Good Afternoon!";
+    } else {
+        greetingMessage = "Good Evening!";
+    }
+
+    greetingElement.textContent = greetingMessage;
+    greetingElement.className = "text-xl text-center my-4";
+    document.querySelector('header').appendChild(greetingElement);
+});
+// Function to change the image
+function changeImage() {
+    // Get the image element by its ID
+    let imgElement = document.getElementById('myImage');
+    
+    // Change the source of the image
+    imgElement.src = 'new-image.jpg';
+    
+    // Optionally, you can also change other attributes
+    imgElement.alt = 'New image description';
+    imgElement.title = 'New image title';
+}
+const image = document.getElementById('changeableImage');
+let isFirstImage = true;
+
+image.addEventListener('click', function() {
+    if (isFirstImage) {
+        this.src = 'image2.jpg';
+        this.alt = 'Second image';
+        this.title = 'Click to go back';
+    } else {
+        this.src = 'image1.jpg';
+        this.alt = 'First image';
+        this.title = 'Click to change';
+    }
+    isFirstImage = !isFirstImage;
+});
